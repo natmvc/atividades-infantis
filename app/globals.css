@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: #243044;
+  background:
+    radial-gradient(circle at 8% 4%, rgba(255, 201, 54, 0.22), transparent 24rem),
+    radial-gradient(circle at 92% 2%, rgba(36, 168, 255, 0.18), transparent 22rem),
+    linear-gradient(180deg, #effaff 0%, #ffffff 22rem);
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clip-cloud {
+  border-radius: 42% 58% 50% 50% / 60% 52% 48% 40%;
+}
+
+.floating {
+  animation: floating 5s ease-in-out infinite;
+}
+
+.floating-delay {
+  animation: floating 6s ease-in-out 1.2s infinite;
+}
+
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
