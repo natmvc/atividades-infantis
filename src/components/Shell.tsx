@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Globe2, Menu, ShoppingBag } from "lucide-react";
+import { Globe2, Menu, ShoppingBag, X } from "lucide-react";
+import { useState } from "react";
 import type { Locale } from "@/data/site";
 import { routes } from "@/data/site";
 import { Button } from "./Button";
@@ -25,7 +28,9 @@ const nav = {
 };
 
 export function Header({ locale }: { locale: Locale }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const alternate = locale === "pt" ? routes.en.home : routes.pt.home;
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/70 bg-white/86 backdrop-blur-xl">
@@ -72,12 +77,51 @@ export function Header({ locale }: { locale: Locale }) {
             </Button>
           </div>
           <button
+            type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-ink text-white lg:hidden"
-            aria-label="Abrir menu"
+            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setIsMenuOpen((current) => !current)}
           >
-            <Menu size={20} aria-hidden />
+            {isMenuOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
           </button>
         </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        className={`lg:hidden ${isMenuOpen ? "block" : "hidden"}`}
+      >
+        <nav
+          className="mx-auto grid max-w-7xl gap-2 border-t border-sky-100 bg-white px-4 py-4 shadow-soft sm:px-6"
+          aria-label="Menu principal mobile"
+        >
+          {nav[locale].map(([label, href]) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={closeMenu}
+              className="rounded-2xl px-4 py-3 text-base font-black text-ink transition hover:bg-skywash"
+            >
+              {label}
+            </Link>
+          ))}
+          <div className="mt-2 grid gap-2 border-t border-sky-100 pt-4 sm:hidden">
+            <Link
+              href={alternate}
+              onClick={closeMenu}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-skywash px-4 text-sm font-black text-ink ring-1 ring-sky-100"
+              aria-label={locale === "pt" ? "Switch to English" : "Mudar para portugues"}
+            >
+              <Globe2 size={17} aria-hidden />
+              PT | EN
+            </Link>
+            <Button href={routes[locale].pack} ariaLabel={locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}>
+              {locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}
+            </Button>
+          </div>
+        </nav>
       </div>
     </header>
   );
