@@ -26,7 +26,22 @@ export const checkoutLinks: Record<ProductKind | "completePack", string> = {
   activities: "#LINK_CHECKOUT_ATIVIDADES",
   handwriting: "#LINK_CHECKOUT_CALIGRAFIA",
   themePack: "#LINK_CHECKOUT_PACK_TEMA",
-  completePack: "#LINK_CHECKOUT_PACK_COMPLETO"
+  completePack: "https://pay.kiwify.com.br/eXexe0h"
+};
+
+export const themeCheckoutLinks: Record<string, Partial<Record<ProductKind, string>>> = {
+  dinossauros: {
+    coloring: "https://pay.kiwify.com.br/sctUT5i",
+    handwriting: "https://pay.kiwify.com.br/Kqa1hC8",
+    activities: "https://pay.kiwify.com.br/RkzaDcT",
+    themePack: "https://pay.kiwify.com.br/3Y4KLjo"
+  },
+  unicornios: {
+    coloring: "https://pay.kiwify.com.br/pP76rSz",
+    handwriting: "https://pay.kiwify.com.br/sNqLJTa",
+    activities: "https://pay.kiwify.com.br/VtLn5fF",
+    themePack: "https://pay.kiwify.com.br/Nt5Y0kv"
+  }
 };
 
 export const themes: Theme[] = [
@@ -342,6 +357,10 @@ export function productPath(locale: Locale, theme: Theme, kind: ProductKind) {
   const slug = locale === "pt" ? theme.ptSlug : theme.enSlug;
   const product = productCopy[locale][kind].slug;
   return `${routes[locale].productBase}/${slug}-${product}`;
+}
+
+export function checkoutLinkFor(theme: Theme, kind: ProductKind) {
+  return themeCheckoutLinks[theme.ptSlug]?.[kind] ?? checkoutLinks[kind];
 }
 
 export const productCopy: Record<Locale, Record<ProductKind, {

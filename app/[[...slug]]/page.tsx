@@ -8,6 +8,7 @@ import { CompletePackBand, PrintableBadges, ProductCard, SectionHeader, Steps, T
 import { PageShell } from "@/components/Shell";
 import { Reveal } from "@/components/Motion";
 import {
+  checkoutLinkFor,
   checkoutLinks,
   getThemeBySlug,
   productCopy,
@@ -475,7 +476,7 @@ function ProductPage({ locale, slug }: { locale: Locale; slug: string }) {
   const theme = getThemeBySlug(locale, themeSlug);
   if (!theme) notFound();
   const isPack = kind === "themePack";
-  const checkout = checkoutLinks[kind];
+  const checkout = checkoutLinkFor(theme, kind);
   return (
     <>
       <section className="px-4 py-14 sm:px-6">
