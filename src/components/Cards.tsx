@@ -89,7 +89,7 @@ export function ProductCard({
       <div className="relative mb-5 h-48 overflow-hidden rounded-[1.5rem] bg-skywash">
         <Image src={productImage} alt={`${product.title} ${theme[locale].name}`} fill className={`object-cover ${productImagePosition}`} />
         {isPack ? (
-          <div className="absolute left-4 top-4 rounded-full bg-candy px-3 py-1 text-xs font-black text-white">
+          <div className="absolute bottom-4 left-4 rounded-full bg-candy px-3 py-1 text-xs font-black text-white">
             {locale === "pt" ? "Economize 35%" : "Save 35%"}
           </div>
         ) : null}
