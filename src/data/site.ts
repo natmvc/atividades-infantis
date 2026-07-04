@@ -52,6 +52,12 @@ export const productImages: Record<string, Partial<Record<ProductKind, string>>>
     handwriting: "/images/dinossauros-caligrafia.png",
     themePack: "/images/dinossauros-kit.png"
   },
+  fazendinha: {
+    coloring: "/images/fazendinha-colorir.png",
+    activities: "/images/fazendinha-atividades.png",
+    handwriting: "/images/fazendinha-caligrafia.png",
+    themePack: "/images/fazendinha-kit.png"
+  },
   unicornios: {
     coloring: "/images/unicornios-colorir.png",
     activities: "/images/unicornios-atividades.png",
@@ -63,6 +69,12 @@ export const productImages: Record<string, Partial<Record<ProductKind, string>>>
 export const productImagePositions: Record<string, Partial<Record<ProductKind, string>>> = {
   dinossauros: {
     coloring: "object-top",
+    themePack: "object-top"
+  },
+  fazendinha: {
+    coloring: "object-top",
+    activities: "object-top",
+    handwriting: "object-top",
     themePack: "object-top"
   },
   unicornios: {
