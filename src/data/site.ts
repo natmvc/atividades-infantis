@@ -45,6 +45,14 @@ export const themeCheckoutLinks: Record<string, Partial<Record<ProductKind, stri
   }
 };
 
+export const productImages: Record<string, Partial<Record<ProductKind, string>>> = {
+  dinossauros: {
+    coloring: "/images/dinossauros-colorir.png",
+    activities: "/images/dinossauros-atividades.png",
+    handwriting: "/images/dinossauros-caligrafia.png"
+  }
+};
+
 export const themes: Theme[] = [
   {
     ptSlug: "dinossauros",
@@ -329,6 +337,10 @@ export function productPath(locale: Locale, theme: Theme, kind: ProductKind) {
 
 export function checkoutLinkFor(theme: Theme, kind: ProductKind) {
   return themeCheckoutLinks[theme.ptSlug]?.[kind] ?? checkoutLinks[kind];
+}
+
+export function productImageFor(theme: Theme, kind: ProductKind) {
+  return productImages[theme.ptSlug]?.[kind] ?? theme.image;
 }
 
 export const productCopy: Record<Locale, Record<ProductKind, {
