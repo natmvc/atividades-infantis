@@ -53,6 +53,12 @@ export const productImages: Record<string, Partial<Record<ProductKind, string>>>
   }
 };
 
+export const productImagePositions: Record<string, Partial<Record<ProductKind, string>>> = {
+  dinossauros: {
+    coloring: "object-top"
+  }
+};
+
 export const themes: Theme[] = [
   {
     ptSlug: "dinossauros",
@@ -341,6 +347,10 @@ export function checkoutLinkFor(theme: Theme, kind: ProductKind) {
 
 export function productImageFor(theme: Theme, kind: ProductKind) {
   return productImages[theme.ptSlug]?.[kind] ?? theme.image;
+}
+
+export function productImagePositionFor(theme: Theme, kind: ProductKind) {
+  return productImagePositions[theme.ptSlug]?.[kind] ?? "object-center";
 }
 
 export const productCopy: Record<Locale, Record<ProductKind, {

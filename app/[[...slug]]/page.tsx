@@ -13,6 +13,7 @@ import {
   getThemeBySlug,
   productCopy,
   productImageFor,
+  productImagePositionFor,
   productPath,
   routes,
   seasonal,
@@ -491,12 +492,13 @@ function ProductPage({ locale, slug }: { locale: Locale; slug: string }) {
   const isPack = kind === "themePack";
   const checkout = checkoutLinkFor(theme, kind);
   const productImage = productImageFor(theme, kind);
+  const productImagePosition = productImagePositionFor(theme, kind);
   return (
     <>
       <section className="px-4 py-14 sm:px-6">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <Reveal className="overflow-hidden rounded-[2.5rem] bg-white p-3 shadow-soft ring-1 ring-sky-100">
-            <Image src={productImage} alt={`${product.title} ${theme[locale].name}`} width={1400} height={1050} className="aspect-[4/3] rounded-[2rem] object-cover" priority />
+            <Image src={productImage} alt={`${product.title} ${theme[locale].name}`} width={1400} height={1050} className={`aspect-[4/3] rounded-[2rem] object-cover ${productImagePosition}`} priority />
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-candy">{theme[locale].name}</p>
@@ -521,7 +523,7 @@ function ProductPage({ locale, slug }: { locale: Locale; slug: string }) {
           <div className="grid gap-5 md:grid-cols-3">
             {["Capa", "Mockup", "Galeria"].map((label) => (
               <div key={label} className="relative h-64 overflow-hidden rounded-[2rem] bg-skywash shadow-soft ring-1 ring-sky-100">
-                <Image src={productImage} alt={`${label} ${product.title}`} fill className="object-cover" />
+                <Image src={productImage} alt={`${label} ${product.title}`} fill className={`object-cover ${productImagePosition}`} />
               </div>
             ))}
           </div>

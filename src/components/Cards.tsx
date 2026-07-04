@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, Download, Printer, Star } from "lucide-react";
 import type { Locale, ProductKind, Theme } from "@/data/site";
-import { checkoutLinks, productCopy, productImageFor, productPath, themePath } from "@/data/site";
+import { checkoutLinks, productCopy, productImageFor, productImagePositionFor, productPath, themePath } from "@/data/site";
 import { Button } from "./Button";
 import { Reveal, Tap } from "./Motion";
 
@@ -83,10 +83,11 @@ export function ProductCard({
   const product = productCopy[locale][kind];
   const isPack = kind === "themePack";
   const productImage = productImageFor(theme, kind);
+  const productImagePosition = productImagePositionFor(theme, kind);
   return (
     <Reveal className={`rounded-[2rem] bg-white p-5 shadow-soft ring-1 ${isPack ? "ring-candy/30" : "ring-sky-100"}`}>
       <div className="relative mb-5 h-48 overflow-hidden rounded-[1.5rem] bg-skywash">
-        <Image src={productImage} alt={`${product.title} ${theme[locale].name}`} fill className="object-cover" />
+        <Image src={productImage} alt={`${product.title} ${theme[locale].name}`} fill className={`object-cover ${productImagePosition}`} />
         {isPack ? (
           <div className="absolute left-4 top-4 rounded-full bg-candy px-3 py-1 text-xs font-black text-white">
             {locale === "pt" ? "Economize 35%" : "Save 35%"}
