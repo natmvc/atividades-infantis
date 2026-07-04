@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Globe2, Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import type { Locale } from "@/data/site";
-import { routes } from "@/data/site";
+import { checkoutLinks, routes } from "@/data/site";
 import { Button } from "./Button";
 
 const nav = {
@@ -72,7 +72,7 @@ export function Header({ locale }: { locale: Locale }) {
             PT | EN
           </Link>
           <div className="hidden sm:block">
-            <Button href={routes[locale].pack} ariaLabel={locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}>
+            <Button href={checkoutLinks.completePack} ariaLabel={locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}>
               {locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}
             </Button>
           </div>
@@ -117,7 +117,7 @@ export function Header({ locale }: { locale: Locale }) {
               <Globe2 size={17} aria-hidden />
               PT | EN
             </Link>
-            <Button href={routes[locale].pack} ariaLabel={locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}>
+            <Button href={checkoutLinks.completePack} ariaLabel={locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}>
               {locale === "pt" ? "Quero o Pack Completo" : "Get the Complete Pack"}
             </Button>
           </div>

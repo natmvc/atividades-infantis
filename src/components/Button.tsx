@@ -18,10 +18,14 @@ const styles = {
 };
 
 export function Button({ href, children, variant = "primary", ariaLabel }: ButtonProps) {
+  const isExternal = href.startsWith("http://") || href.startsWith("https://");
+
   return (
     <Link
       href={href}
       aria-label={ariaLabel}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-extrabold transition ${styles[variant]} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4`}
     >
       {variant === "primary" ? <Sparkles aria-hidden size={18} /> : null}
