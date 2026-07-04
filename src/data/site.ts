@@ -51,12 +51,24 @@ export const productImages: Record<string, Partial<Record<ProductKind, string>>>
     activities: "/images/dinossauros-atividades.png",
     handwriting: "/images/dinossauros-caligrafia.png",
     themePack: "/images/dinossauros-kit.png"
+  },
+  unicornios: {
+    coloring: "/images/unicornios-colorir.png",
+    activities: "/images/unicornios-atividades.png",
+    handwriting: "/images/unicornios-caligrafia.png",
+    themePack: "/images/unicornios-kit.png"
   }
 };
 
 export const productImagePositions: Record<string, Partial<Record<ProductKind, string>>> = {
   dinossauros: {
     coloring: "object-top",
+    themePack: "object-top"
+  },
+  unicornios: {
+    coloring: "object-top",
+    activities: "object-top",
+    handwriting: "object-top",
     themePack: "object-top"
   }
 };
