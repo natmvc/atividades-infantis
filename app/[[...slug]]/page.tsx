@@ -223,6 +223,7 @@ function seasonalTheme(): Theme {
     enSlug: "seasonal-activities",
     image: "/images/datas-comemorativas.png",
     accent: "from-pink-300 to-yellow-300",
+    available: false,
     pt: {
       name: "Datas Comemorativas",
       short: "Natal, Páscoa, Dia das Mães, festas escolares e muito mais.",
@@ -335,37 +336,50 @@ function AllThemes({ locale }: { locale: Locale }) {
 
 function ThemePage({ locale, theme }: { locale: Locale; theme: Theme }) {
   const products: ProductKind[] = ["coloring", "activities", "handwriting", "themePack"];
+  const available = theme.available !== false;
   return (
     <>
       <section className="px-4 py-12 sm:px-6">
         <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <p className="mb-3 text-sm font-black uppercase tracking-wide text-candy">PDF</p>
+            <p className="mb-3 text-sm font-black uppercase tracking-wide text-candy">
+              {available ? "PDF" : locale === "pt" ? "Em breve" : "Coming soon"}
+            </p>
             <h1 className="text-4xl font-black leading-tight text-ink sm:text-6xl">{theme[locale].hero}</h1>
             <p className="mt-5 text-lg leading-8 text-ink/68">{theme[locale].description}</p>
-            <div className="mt-7">
-              <PrintableBadges locale={locale} />
-            </div>
+            {available ? (
+              <div className="mt-7">
+                <PrintableBadges locale={locale} />
+              </div>
+            ) : (
+              <p className="mt-7 rounded-[1.5rem] bg-sunny/80 p-4 text-base font-black leading-7 text-ink shadow-soft ring-1 ring-yellow-200">
+                {locale === "pt"
+                  ? "Esta coleção está sendo preparada e ficará disponível em breve."
+                  : "This collection is being prepared and will be available soon."}
+              </p>
+            )}
           </Reveal>
           <Reveal delay={0.1} className="overflow-hidden rounded-[2.5rem] bg-white p-3 shadow-soft ring-1 ring-sky-100">
             <Image src={theme.image} alt={theme[locale].name} width={1400} height={1050} className="aspect-[4/3] rounded-[2rem] object-cover" priority />
           </Reveal>
         </div>
       </section>
-      <section className="px-4 py-14 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeader
-            title={locale === "pt" ? `Escolha seu material de ${theme.pt.name}` : `Choose your ${theme.en.name} material`}
-            text={locale === "pt" ? "Compre um livro individual ou economize levando o pack completo do tema." : "Buy one book or save with the complete theme pack."}
-          />
-          <div className="grid gap-5 lg:grid-cols-4">
-            {products.map((kind) => (
-              <ProductCard key={kind} theme={theme} locale={locale} kind={kind} />
-            ))}
+      {available ? (
+        <section className="px-4 py-14 sm:px-6">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeader
+              title={locale === "pt" ? `Escolha seu material de ${theme.pt.name}` : `Choose your ${theme.en.name} material`}
+              text={locale === "pt" ? "Compre um livro individual ou economize levando o pack completo do tema." : "Buy one book or save with the complete theme pack."}
+            />
+            <div className="grid gap-5 lg:grid-cols-4">
+              {products.map((kind) => (
+                <ProductCard key={kind} theme={theme} locale={locale} kind={kind} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-      <CompletePackBand locale={locale} />
+        </section>
+      ) : null}
+      {available ? <CompletePackBand locale={locale} /> : null}
     </>
   );
 }
@@ -376,7 +390,7 @@ function SeasonalPage({ locale }: { locale: Locale }) {
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           title={locale === "pt" ? "Atividades para datas comemorativas" : "Seasonal activities"}
-          text={locale === "pt" ? "Materiais prontos para imprimir em momentos especiais do ano. Perfeito para escolas, professoras, famílias, igrejas e eventos." : "Ready-to-print materials for special moments throughout the year. Perfect for schools, teachers, families, churches and events."}
+          text={locale === "pt" ? "Os materiais de datas comemorativas estão sendo preparados e serão liberados em breve." : "Seasonal materials are being prepared and will be released soon."}
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {seasonal.map(([ptSlug, enSlug, ptName, enName]) => {
@@ -389,14 +403,11 @@ function SeasonalPage({ locale }: { locale: Locale }) {
                 <div className="p-5">
                   <h2 className="text-xl font-black text-ink">{title}</h2>
                   <p className="mt-2 min-h-12 text-sm leading-6 text-ink/65">
-                    {locale === "pt" ? `Atividades de ${title} prontas para imprimir.` : `${title} activities ready to print.`}
+                    {locale === "pt" ? `Atividades de ${title} serão disponibilizadas em breve.` : `${title} activities will be available soon.`}
                   </p>
-                  <Link
-                    href={locale === "pt" ? `/datas-comemorativas#${ptSlug}` : `/en/seasonal-activities#${enSlug}`}
-                    className="mt-4 inline-flex rounded-full bg-candy px-4 py-2 text-sm font-black text-white"
-                  >
-                    {locale === "pt" ? "Ver atividades" : "View activities"}
-                  </Link>
+                  <span className="mt-4 inline-flex rounded-full bg-sunny px-4 py-2 text-sm font-black text-ink">
+                    {locale === "pt" ? "Em breve" : "Coming soon"}
+                  </span>
                 </div>
               </Reveal>
             );
@@ -475,6 +486,7 @@ function ProductPage({ locale, slug }: { locale: Locale; slug: string }) {
   const themeSlug = slug.replace(`-${product.slug}`, "");
   const theme = getThemeBySlug(locale, themeSlug);
   if (!theme) notFound();
+  if (theme.available === false) return <ThemePage locale={locale} theme={theme} />;
   const isPack = kind === "themePack";
   const checkout = checkoutLinkFor(theme, kind);
   return (

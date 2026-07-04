@@ -36,6 +36,7 @@ export function ThemeCard({
   showStartingPrice?: boolean;
 }) {
   const copy = theme[locale];
+  const available = theme.available !== false;
   return (
     <Tap>
       <Link
@@ -45,19 +46,23 @@ export function ThemeCard({
         <div className={`relative h-52 bg-gradient-to-br ${theme.accent}`}>
           <Image src={theme.image} alt={copy.name} fill className="object-cover transition duration-500 group-hover:scale-105" />
           <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-ink shadow-soft">
-            PDF
+            {available ? "PDF" : locale === "pt" ? "Em breve" : "Coming soon"}
           </div>
         </div>
         <div className="p-5">
-          {showStartingPrice ? (
+          {showStartingPrice && available ? (
             <span className="mb-3 inline-flex rounded-full bg-sunny px-3 py-1 text-xs font-black text-ink">
               {locale === "pt" ? "A partir de R$7,90" : "From $7.90"}
+            </span>
+          ) : !available ? (
+            <span className="mb-3 inline-flex rounded-full bg-sunny px-3 py-1 text-xs font-black text-ink">
+              {locale === "pt" ? "Em breve" : "Coming soon"}
             </span>
           ) : null}
           <h3 className="text-xl font-black text-ink">{copy.name}</h3>
           <p className="mt-2 min-h-12 text-sm leading-6 text-ink/65">{copy.short}</p>
           <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-skywash px-4 py-2 text-sm font-black text-ocean">
-            {locale === "pt" ? "Ver coleção" : "View collection"}
+            {available ? (locale === "pt" ? "Ver coleção" : "View collection") : (locale === "pt" ? "Ver prévia" : "Preview")}
             <Star size={16} fill="currentColor" aria-hidden />
           </span>
         </div>

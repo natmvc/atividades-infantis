@@ -5,6 +5,7 @@ export type Theme = {
   enSlug: string;
   image: string;
   accent: string;
+  available?: boolean;
   pt: {
     name: string;
     short: string;
@@ -72,7 +73,7 @@ export const themes: Theme[] = [
     accent: "from-amber-200 to-green-400",
     pt: {
       name: "Fazendinha",
-      short: "Animais fofos, rotina da fazenda e atividades educativas.",
+      short: "Bichinhos fofos, rotina da fazenda e atividades educativas.",
       hero: "Atividades infantis de Fazendinha para imprimir",
       description:
         "Coleção alegre com animais da fazenda, cenas rurais e tarefas prontas para estimular criatividade, atenção e coordenação."
@@ -91,9 +92,9 @@ export const themes: Theme[] = [
     image: "/images/unicornios.png",
     accent: "from-pink-300 to-violet-300",
     pt: {
-      name: "Unicornios",
+      name: "Unicórnios",
       short: "Magia, arco-íris e páginas encantadoras para imprimir.",
-      hero: "Atividades infantis de Unicornios para imprimir",
+      hero: "Atividades infantis de Unicórnios para imprimir",
       description:
         "PDFs coloridos com unicórnios, arco-íris e tarefas lúdicas para momentos criativos em casa, escola ou festas."
     },
@@ -110,6 +111,7 @@ export const themes: Theme[] = [
     enSlug: "princesses",
     image: "/images/princesas.png",
     accent: "from-rose-300 to-sky-300",
+    available: false,
     pt: {
       name: "Princesas",
       short: "Castelos, coroas e atividades delicadas para aprender brincando.",
@@ -130,6 +132,7 @@ export const themes: Theme[] = [
     enSlug: "capybaras",
     image: "/images/capivaras.png",
     accent: "from-orange-200 to-emerald-300",
+    available: false,
     pt: {
       name: "Capivaras",
       short: "Um tema fofo, brasileiro e perfeito para kits criativos.",
@@ -170,6 +173,7 @@ export const themes: Theme[] = [
     enSlug: "under-the-sea",
     image: "/images/fundo-do-mar.png",
     accent: "from-cyan-300 to-blue-400",
+    available: false,
     pt: {
       name: "Fundo do Mar",
       short: "Peixes, tartarugas e aventuras aquáticas cheias de cor.",
@@ -190,6 +194,7 @@ export const themes: Theme[] = [
     enSlug: "kids",
     image: "/images/criancas.png",
     accent: "from-fuchsia-300 to-yellow-300",
+    available: false,
     pt: {
       name: "Crianças",
       short: "Datas, brincadeiras, diversidade e atividades para todos.",
@@ -210,6 +215,7 @@ export const themes: Theme[] = [
     enSlug: "countries",
     image: "/images/paises.png",
     accent: "from-green-300 to-sky-400",
+    available: false,
     pt: {
       name: "Países",
       short: "Culturas, mapas e viagens educativas pelo mundo.",
@@ -230,6 +236,7 @@ export const themes: Theme[] = [
     enSlug: "space",
     image: "/images/espaco.png",
     accent: "from-indigo-400 to-blue-500",
+    available: false,
     pt: {
       name: "Espaço",
       short: "Planetas, foguetes e descobertas para pequenos astronautas.",
@@ -246,50 +253,11 @@ export const themes: Theme[] = [
     }
   },
   {
-    ptSlug: "animais",
-    enSlug: "animals",
-    image: "/images/fazendinha.png",
-    accent: "from-lime-200 to-teal-300",
-    pt: {
-      name: "Animais",
-      short: "Bichinhos de vários habitats em atividades prontas.",
-      hero: "Atividades infantis de Animais para imprimir",
-      description:
-        "Uma coleção versátil com animais da terra, água e fazenda para colorir, associar e aprender."
-    },
-    en: {
-      name: "Animals",
-      short: "Animals from many habitats in ready-to-print activities.",
-      hero: "Printable animal activities for kids",
-      description:
-        "A versatile collection with land, sea and farm animals for coloring, matching and learning."
-    }
-  },
-  {
-    ptSlug: "transportes",
-    enSlug: "transportation",
-    image: "/images/carros.png",
-    accent: "from-sky-300 to-orange-300",
-    pt: {
-      name: "Transportes",
-      short: "Carros, aviões, caminhos e meios de transporte.",
-      hero: "Atividades infantis de Transportes para imprimir",
-      description:
-        "PDFs com veículos, rotas, formas e propostas para trabalhar movimento, direção e vocabulário."
-    },
-    en: {
-      name: "Transportation",
-      short: "Cars, planes, routes and transportation themes.",
-      hero: "Printable transportation activities for kids",
-      description:
-        "PDFs with vehicles, routes, shapes and prompts to explore movement, direction and vocabulary."
-    }
-  },
-  {
     ptSlug: "profissoes",
     enSlug: "professions",
     image: "/images/profissoes.png",
     accent: "from-yellow-300 to-red-300",
+    available: false,
     pt: {
       name: "Profissões",
       short: "Médicos, bombeiros, professores e sonhos de futuro.",
