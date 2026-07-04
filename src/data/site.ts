@@ -49,13 +49,15 @@ export const productImages: Record<string, Partial<Record<ProductKind, string>>>
   dinossauros: {
     coloring: "/images/dinossauros-colorir.png",
     activities: "/images/dinossauros-atividades.png",
-    handwriting: "/images/dinossauros-caligrafia.png"
+    handwriting: "/images/dinossauros-caligrafia.png",
+    themePack: "/images/dinossauros-kit.png"
   }
 };
 
 export const productImagePositions: Record<string, Partial<Record<ProductKind, string>>> = {
   dinossauros: {
-    coloring: "object-top"
+    coloring: "object-top",
+    themePack: "object-top"
   }
 };
 
