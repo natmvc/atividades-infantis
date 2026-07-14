@@ -568,22 +568,22 @@ function FathersDayPageContent({
             </div>
           </Reveal>
           <Reveal delay={0.1} className="relative">
-            <div className="floating absolute -left-4 top-8 z-10 rotate-[-4deg] rounded-3xl bg-white p-4 shadow-soft">
+            <div className="floating absolute right-10 top-4 z-20 rotate-[3deg] rounded-3xl bg-white p-4 shadow-soft sm:right-24">
               <p className="text-sm font-black text-ink">R$10,00</p>
               <p className="text-xs font-bold text-ink/60">livro individual</p>
             </div>
-            <div className="floating-delay absolute -right-2 bottom-10 z-10 rotate-[4deg] rounded-3xl bg-sunny p-4 text-ink shadow-soft">
+            <div className="floating-delay absolute -right-2 bottom-10 z-20 rotate-[4deg] rounded-3xl bg-sunny p-4 text-ink shadow-soft">
               <p className="text-sm font-black">Pack R$14,90</p>
             </div>
             <div className="relative min-h-[34rem]">
-              <div
-                className="absolute left-0 top-0 z-10 max-w-[22rem] rotate-[-5deg] text-ink"
-                style={{ textShadow: "0 8px 22px rgba(0, 67, 138, 0.16), 0 2px 0 rgba(255,255,255,0.9)" }}
-              >
-                <p className="text-3xl font-black leading-none text-white">Feliz</p>
-                <p className="mt-1 text-5xl font-black leading-none text-ocean sm:text-6xl">Dia dos</p>
-                <p className="mt-1 text-7xl font-black leading-none text-ocean sm:text-8xl">Pais</p>
-              </div>
+              <Image
+                src="/images/dia-dos-pais-logo-crop.png"
+                alt="Logo Dia dos Pais"
+                width={940}
+                height={480}
+                className="absolute left-0 top-0 z-10 w-[19rem] rotate-[-4deg] drop-shadow-2xl sm:w-[24rem] lg:w-[26rem]"
+                priority
+              />
               <Image
                 src="/images/dia-dos-pais-pack-livros.png"
                 alt="Dois livros digitais de Dia dos Pais"
