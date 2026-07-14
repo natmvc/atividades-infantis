@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, Brain, CheckCircle2, HeartHandshake, Palette, Pencil, School, Search, ShieldCheck, SmilePlus, Sparkles, Users } from "lucide-react";
+import { BookOpen, Brain, CheckCircle2, Gift, Heart, HeartHandshake, Palette, Pencil, Printer, School, Search, ShieldCheck, SmilePlus, Sparkles, Users } from "lucide-react";
 import { Button } from "@/components/Button";
 import { CompletePackBand, PrintableBadges, ProductCard, SectionHeader, Steps, ThemeCard } from "@/components/Cards";
 import { PageShell } from "@/components/Shell";
@@ -83,6 +83,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const prefix = isPt ? "" : "/en";
   const current = parts[0] ?? "";
   const theme = parts.length === 1 ? getThemeBySlug(locale, current) : undefined;
+  const isFathersDay =
+    current === (isPt ? "datas-comemorativas" : "seasonal-activities") &&
+    parts[1] === (isPt ? "dia-dos-pais" : "fathers-day");
 
   if (theme) {
     return {
@@ -93,6 +96,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         ? `Compre atividades infantis de ${theme.pt.name} para imprimir: livro de colorir, livro de atividades, caligrafia e pack completo.`
         : `Buy printable ${theme.en.name} activities: coloring book, activity book, handwriting practice and complete pack.`,
       alternates: { canonical: `${prefix}/${isPt ? theme.ptSlug : theme.enSlug}` }
+    };
+  }
+
+  if (isFathersDay) {
+    return {
+      title: isPt ? "Dia dos Pais | Livrinho Personalizado para Imprimir" : "Father's Day Printable Book",
+      description: isPt
+        ? "Livrinhos de Dia dos Pais para filho, filha e pack completo. Uma lembrança afetiva, pronta para imprimir e presentear."
+        : "Father's Day printable books for sons, daughters and a complete pack."
     };
   }
 
@@ -125,7 +137,10 @@ export default async function CatchAllPage({ params }: PageProps) {
   let content: React.ReactNode;
   if (parts.length === 0) content = <Home locale={locale} />;
   else if (current === (locale === "pt" ? "todos-os-temas" : "all-themes")) content = <AllThemes locale={locale} />;
-  else if (current === (locale === "pt" ? "datas-comemorativas" : "seasonal-activities")) content = <SeasonalPage locale={locale} />;
+  else if (current === (locale === "pt" ? "datas-comemorativas" : "seasonal-activities")) {
+    const fathersDaySlug = locale === "pt" ? "dia-dos-pais" : "fathers-day";
+    content = parts[1] === fathersDaySlug ? <FathersDayPage locale={locale} /> : <SeasonalPage locale={locale} />;
+  }
   else if (current === (locale === "pt" ? "pack-completo" : "complete-pack")) content = <PackPage locale={locale} />;
   else if (current === (locale === "pt" ? "sobre" : "about")) content = <AboutPage locale={locale} />;
   else if (current === (locale === "pt" ? "contato" : "contact")) content = <ContactPage locale={locale} />;
@@ -397,19 +412,38 @@ function SeasonalPage({ locale }: { locale: Locale }) {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {seasonal.map(([ptSlug, enSlug, ptName, enName]) => {
             const title = locale === "pt" ? ptName : enName;
+            const isFathersDay = ptSlug === "dia-dos-pais";
+            const href = locale === "pt" ? `/datas-comemorativas/${ptSlug}` : `/en/seasonal-activities/${enSlug}`;
             return (
               <Reveal key={ptSlug} className="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-sky-100">
                 <div className="relative h-44">
-                  <Image src="/images/datas-comemorativas.png" alt={title} fill className="object-cover" />
+                  <Image
+                    src={isFathersDay ? "/images/dia-dos-pais-filho-galeria.png" : "/images/datas-comemorativas.png"}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div className="p-5">
                   <h2 className="text-xl font-black text-ink">{title}</h2>
                   <p className="mt-2 min-h-12 text-sm leading-6 text-ink/65">
-                    {locale === "pt" ? `Atividades de ${title} serão disponibilizadas em breve.` : `${title} activities will be available soon.`}
+                    {isFathersDay
+                      ? locale === "pt"
+                        ? "Livrinhos afetivos para imprimir, preencher e presentear no Dia dos Pais."
+                        : "Printable keepsake books to fill in and gift on Father's Day."
+                      : locale === "pt"
+                        ? `Atividades de ${title} serão disponibilizadas em breve.`
+                        : `${title} activities will be available soon.`}
                   </p>
-                  <span className="mt-4 inline-flex rounded-full bg-sunny px-4 py-2 text-sm font-black text-ink">
-                    {locale === "pt" ? "Em breve" : "Coming soon"}
-                  </span>
+                  {isFathersDay ? (
+                    <Link href={href} className="mt-4 inline-flex rounded-full bg-candy px-4 py-2 text-sm font-black text-white">
+                      {locale === "pt" ? "Ver produtos" : "View products"}
+                    </Link>
+                  ) : (
+                    <span className="mt-4 inline-flex rounded-full bg-sunny px-4 py-2 text-sm font-black text-ink">
+                      {locale === "pt" ? "Em breve" : "Coming soon"}
+                    </span>
+                  )}
                 </div>
               </Reveal>
             );
@@ -417,6 +451,258 @@ function SeasonalPage({ locale }: { locale: Locale }) {
         </div>
       </div>
     </section>
+  );
+}
+
+const fathersDayCheckoutLinks = {
+  son: "#LINK_CHECKOUT_DIA_DOS_PAIS_FILHO",
+  daughter: "#LINK_CHECKOUT_DIA_DOS_PAIS_FILHA",
+  pack: "#LINK_CHECKOUT_DIA_DOS_PAIS_PACK"
+};
+
+const fathersDayProducts = [
+  {
+    id: "son",
+    title: "Livro do Filho",
+    badge: "Para filho",
+    price: "R$10,00",
+    image: "/images/dia-dos-pais-filho-capa.png",
+    description: "Um livrinho azul, carinhoso e pronto para a criança preencher, colorir e entregar ao papai.",
+    href: fathersDayCheckoutLinks.son
+  },
+  {
+    id: "daughter",
+    title: "Livro da Filha",
+    badge: "Para filha",
+    price: "R$10,00",
+    image: "/images/dia-dos-pais-filha-capa.png",
+    description: "Uma versão rosa e delicada para transformar desenhos, respostas e mensagens em presente afetivo.",
+    href: fathersDayCheckoutLinks.daughter
+  },
+  {
+    id: "pack",
+    title: "Pack Filho + Filha",
+    badge: "Melhor escolha",
+    price: "R$14,90",
+    image: "/images/dia-dos-pais-filha-galeria.png",
+    description: "Leve as duas versões juntas e tenha o material ideal para irmãos, turmas e famílias com filho e filha.",
+    href: fathersDayCheckoutLinks.pack
+  }
+];
+
+function FathersDayPage({ locale }: { locale: Locale }) {
+  const pt = locale === "pt";
+  const highlights = [
+    ["Páginas para colorir", "Desenhos fofos para deixar o presente com a carinha da criança.", Palette],
+    ["Respostas sobre o papai", "Espaços para contar como ele é, do que gosta e momentos favoritos.", Heart],
+    ["Brincadeiras impressas", "Labirinto, ligue os pontos, encontre diferenças, certificado e vale abraço.", Pencil]
+  ] as const;
+  const gallery = [
+    ["/images/dia-dos-pais-filho-galeria.png", "Mockups do livro do filho"],
+    ["/images/dia-dos-pais-filha-galeria.png", "Mockups do livro da filha"],
+    ["/images/dia-dos-pais-filho-abraco.png", "Ilustração de pai e filho"],
+    ["/images/dia-dos-pais-filha-abraco.png", "Ilustração de pai e filha"]
+  ] as const;
+
+  if (!pt) {
+    return (
+      <FathersDayPageContent
+        title="Father's Day printable keepsake books"
+        subtitle="A sweet printable gift for children to fill in, color and give to dad."
+        eyebrow="Seasonal launch"
+        productsTitle="Choose the version"
+        productsText="Individual books or the complete son + daughter pack."
+        highlights={highlights}
+        gallery={gallery}
+        ctaAll="See products"
+      />
+    );
+  }
+
+  return (
+    <FathersDayPageContent
+      title="Livrinho de Dia dos Pais para imprimir e emocionar"
+      subtitle="Um presente simples, criativo e cheio de carinho: a criança colore, responde, desenha e entrega um livrinho feito especialmente para o papai."
+      eyebrow="Especial Dia dos Pais"
+      productsTitle="Escolha o livrinho ideal"
+      productsText="São duas versões individuais e um pack com os dois livros juntos para economizar."
+      highlights={highlights}
+      gallery={gallery}
+      ctaAll="Ver produtos"
+    />
+  );
+}
+
+function FathersDayPageContent({
+  title,
+  subtitle,
+  eyebrow,
+  productsTitle,
+  productsText,
+  highlights,
+  gallery,
+  ctaAll
+}: {
+  title: string;
+  subtitle: string;
+  eyebrow: string;
+  productsTitle: string;
+  productsText: string;
+  highlights: readonly (readonly [string, string, typeof Palette])[];
+  gallery: readonly (readonly [string, string])[];
+  ctaAll: string;
+}) {
+  return (
+    <>
+      <section className="relative isolate overflow-hidden bg-[#f8fbff] px-4 py-12 sm:px-6 lg:py-16">
+        <div className="absolute inset-x-0 top-0 -z-10 h-80 bg-gradient-to-br from-[#9bd8ff] via-[#eaf5ff] to-[#ffe6ef]" />
+        <div className="absolute left-6 top-20 hidden h-28 w-28 rounded-full bg-sunny/40 blur-2xl lg:block" />
+        <div className="absolute right-8 top-36 hidden h-36 w-36 rounded-full bg-candy/20 blur-2xl lg:block" />
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
+          <Reveal>
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-ocean shadow-soft ring-1 ring-sky-100">
+              <Gift size={18} aria-hidden />
+              {eyebrow}
+            </div>
+            <h1 className="max-w-4xl text-4xl font-black leading-tight text-ink sm:text-6xl">{title}</h1>
+            <p className="mt-5 max-w-2xl text-xl leading-9 text-ink/72">{subtitle}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              {["PDF pronto", "Compra digital", "Imprima em casa", "Presente afetivo"].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-ink shadow-soft ring-1 ring-sky-100">
+                  <CheckCircle2 size={17} className="text-grass" aria-hidden />
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Button href="#produtos-dia-dos-pais" ariaLabel={ctaAll}>
+                {ctaAll}
+              </Button>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1} className="relative">
+            <div className="floating absolute -left-4 top-8 z-10 rotate-[-4deg] rounded-3xl bg-white p-4 shadow-soft">
+              <p className="text-sm font-black text-ink">R$10,00</p>
+              <p className="text-xs font-bold text-ink/60">livro individual</p>
+            </div>
+            <div className="floating-delay absolute -right-2 bottom-10 z-10 rotate-[4deg] rounded-3xl bg-sunny p-4 text-ink shadow-soft">
+              <p className="text-sm font-black">Pack R$14,90</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-[0.78fr_1fr]">
+              <div className="relative overflow-hidden rounded-[2rem] bg-white p-3 shadow-soft ring-1 ring-sky-100">
+                <Image src="/images/dia-dos-pais-filho-capa.png" alt="Livro do filho Dia dos Pais" width={1000} height={1000} className="aspect-[3/4] rounded-[1.5rem] object-cover object-top" priority />
+              </div>
+              <div className="grid gap-4">
+                <div className="relative overflow-hidden rounded-[2rem] bg-white p-3 shadow-soft ring-1 ring-sky-100">
+                  <Image src="/images/dia-dos-pais-filha-capa.png" alt="Livro da filha Dia dos Pais" width={1000} height={1000} className="aspect-[4/3] rounded-[1.5rem] object-cover object-top" priority />
+                </div>
+                <div className="relative overflow-hidden rounded-[2rem] bg-white p-3 shadow-soft ring-1 ring-sky-100">
+                  <Image src="/images/dia-dos-pais-logo.png" alt="Logo Dia dos Pais" width={1000} height={650} className="aspect-[16/9] rounded-[1.5rem] object-cover object-center" />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeader
+            title="Um presente que a criança participa de verdade"
+            text="O livrinho mistura atividades afetivas, desenhos e pequenas respostas para transformar a lembrança em algo único."
+          />
+          <div className="grid gap-5 md:grid-cols-3">
+            {highlights.map(([itemTitle, text, Icon], index) => (
+              <Reveal key={itemTitle} delay={index * 0.05} className="rounded-[2rem] bg-skywash p-6 ring-1 ring-sky-100">
+                <Icon className="mb-5 text-candy" size={34} aria-hidden />
+                <h2 className="text-xl font-black text-ink">{itemTitle}</h2>
+                <p className="mt-2 text-sm leading-6 text-ink/66">{text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="produtos-dia-dos-pais" className="px-4 py-14 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeader title={productsTitle} text={productsText} />
+          <div className="grid gap-5 lg:grid-cols-3">
+            {fathersDayProducts.map((product, index) => (
+              <Reveal key={product.id} delay={index * 0.06} className="overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-sky-100">
+                <div className="relative h-80 bg-skywash">
+                  <Image src={product.image} alt={product.title} fill className="object-cover object-top" />
+                  <span className="absolute bottom-4 left-4 rounded-full bg-candy px-4 py-2 text-xs font-black text-white shadow-soft">
+                    {product.badge}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <h2 className="text-2xl font-black text-ink">{product.title}</h2>
+                    <span className="shrink-0 text-2xl font-black text-candy">{product.price}</span>
+                  </div>
+                  <p className="mt-3 min-h-16 text-sm leading-6 text-ink/66">{product.description}</p>
+                  <div className="mt-6">
+                    <Button href={product.href} ariaLabel={`Comprar ${product.title}`}>
+                      Comprar agora
+                    </Button>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-14 sm:px-6">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+          <Reveal>
+            <p className="mb-3 inline-flex rounded-full bg-sunny px-4 py-2 text-sm font-black text-ink">
+              Conteúdo do livrinho
+            </p>
+            <h2 className="text-3xl font-black leading-tight text-ink sm:text-5xl">
+              Páginas para colorir, brincar, responder e guardar
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-ink/70">
+              Inspirado em atividades como “Meu pai é...”, “O que eu mais gosto de fazer com meu pai”, labirinto, vale abraço, ligue os pontos, mensagem especial, mãos da criança e certificado de melhor pai.
+            </p>
+            <div className="mt-6 grid gap-3">
+              {["Pronto para imprimir", "Ideal para casa, escola e lembrancinhas", "Material afetivo e simples de usar"].map((item) => (
+                <span key={item} className="inline-flex items-center gap-3 rounded-2xl bg-skywash p-4 font-black text-ink ring-1 ring-sky-100">
+                  <Printer className="text-ocean" size={20} aria-hidden />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {gallery.map(([src, alt], index) => (
+                <div key={src} className={`relative overflow-hidden rounded-[2rem] bg-skywash shadow-soft ring-1 ring-sky-100 ${index < 2 ? "h-72" : "h-56"}`}>
+                  <Image src={src} alt={alt} fill className="object-cover" />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-ink px-4 py-14 text-white sm:px-6">
+        <div className="absolute left-10 top-10 h-32 w-32 rounded-full bg-ocean/30 blur-2xl" />
+        <div className="absolute bottom-8 right-8 h-40 w-40 rounded-full bg-candy/30 blur-2xl" />
+        <Reveal className="relative mx-auto max-w-4xl text-center">
+          <HeartHandshake className="mx-auto mb-5 text-sunny" size={42} aria-hidden />
+          <h2 className="text-3xl font-black sm:text-5xl">Um presente pequeno no preço, grande na memória</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/78">
+            A criança participa, o papai recebe uma lembrança única, e você entrega algo bonito sem complicação.
+          </p>
+          <div className="mt-8">
+            <Button href="#produtos-dia-dos-pais" variant="soft">
+              Escolher meu livrinho
+            </Button>
+          </div>
+        </Reveal>
+      </section>
+    </>
   );
 }
 
