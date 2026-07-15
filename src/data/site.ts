@@ -316,10 +316,10 @@ export const themes: Theme[] = [
 ];
 
 export const seasonal = [
+  ["dia-dos-pais", "fathers-day", "Dia dos Pais", "Father's Day"],
   ["natal", "christmas", "Natal", "Christmas"],
   ["pascoa", "easter", "Páscoa", "Easter"],
   ["dia-das-maes", "mothers-day", "Dia das Mães", "Mother's Day"],
-  ["dia-dos-pais", "fathers-day", "Dia dos Pais", "Father's Day"],
   ["dia-das-criancas", "childrens-day", "Dia das Crianças", "Children's Day"],
   ["festa-junina", "june-festival", "Festa Junina", "June Festival"],
   ["volta-as-aulas", "back-to-school", "Volta às Aulas", "Back to School"],

@@ -670,8 +670,8 @@ function FathersDayPageContent({
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="relative h-[28rem] overflow-hidden rounded-[2.5rem] bg-skywash shadow-soft ring-1 ring-sky-100 sm:h-[34rem]">
-              <Image src="/images/dia-dos-pais-familia-amarela.png" alt="Pai com filho e filha no Dia dos Pais" fill className="object-cover" />
+            <div className="relative aspect-[3/2] overflow-hidden rounded-[2.5rem] bg-skywash shadow-soft ring-1 ring-sky-100 lg:h-[34rem] lg:aspect-auto">
+              <Image src="/images/dia-dos-pais-familia-amarela.png" alt="Pai com filho e filha no Dia dos Pais" fill className="object-contain lg:object-cover" />
             </div>
           </Reveal>
         </div>
