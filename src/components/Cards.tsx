@@ -48,13 +48,13 @@ export function ThemeCard({
       >
         <div className={`relative h-52 bg-gradient-to-br ${theme.accent}`}>
           <Image src={theme.image} alt={copy.name} fill className="object-cover transition duration-500 group-hover:scale-105" />
-          <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-ink shadow-soft">
+          <div className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-black shadow-soft ${available ? "bg-grass text-white" : "bg-sunny text-ink"}`}>
             {available ? "PDF" : locale === "pt" ? "Em breve" : "Coming soon"}
           </div>
         </div>
         <div className="flex flex-1 flex-col p-5">
           {showStartingPrice && available ? (
-            <span className="mb-3 inline-flex rounded-full bg-sunny px-3 py-1 text-xs font-black text-ink">
+            <span className="mb-3 inline-flex rounded-full bg-grass px-3 py-1 text-xs font-black text-white">
               {startingPrice}
             </span>
           ) : !available ? (
