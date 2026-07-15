@@ -206,6 +206,9 @@ function Hero({ locale }: { locale: Locale }) {
 
 function Home({ locale }: { locale: Locale }) {
   const copy = pageCopy[locale];
+  const availableThemes = themes.filter((theme) => theme.available !== false);
+  const comingSoonThemes = themes.filter((theme) => theme.available === false);
+  const homeThemes = [seasonalTheme(), ...availableThemes, ...comingSoonThemes];
   return (
     <>
       <Hero locale={locale} />
@@ -213,7 +216,7 @@ function Home({ locale }: { locale: Locale }) {
         <div className="mx-auto max-w-7xl">
           <SectionHeader title={copy.themesTitle} text={copy.themesText} />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {[...themes, seasonalTheme()].map((theme) => (
+            {homeThemes.map((theme) => (
               <ThemeCard key={theme.ptSlug} theme={theme} locale={locale} showStartingPrice />
             ))}
           </div>
@@ -238,18 +241,17 @@ function seasonalTheme(): Theme {
   return {
     ptSlug: "datas-comemorativas",
     enSlug: "seasonal-activities",
-    image: "/images/datas-comemorativas.png",
+    image: "/images/dia-dos-pais-familia-amarela.png",
     accent: "from-pink-300 to-yellow-300",
-    available: false,
     pt: {
       name: "Datas Comemorativas",
-      short: "Natal, Páscoa, Dia das Mães, festas escolares e muito mais.",
+      short: "Dia dos Pais liberado, com novas datas especiais chegando em breve.",
       hero: "Atividades para datas comemorativas",
       description: "Materiais prontos para imprimir em momentos especiais do ano."
     },
     en: {
       name: "Seasonal Activities",
-      short: "Christmas, Easter, Mother's Day, school parties and more.",
+      short: "Father's Day is available now, with more special dates coming soon.",
       hero: "Seasonal printable activities",
       description: "Ready-to-print materials for special moments throughout the year."
     }

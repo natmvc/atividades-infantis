@@ -37,11 +37,14 @@ export function ThemeCard({
 }) {
   const copy = theme[locale];
   const available = theme.available !== false;
+  const startingPrice = theme.ptSlug === "datas-comemorativas"
+    ? locale === "pt" ? "A partir de R$10,00" : "From $10.00"
+    : locale === "pt" ? "A partir de R$7,90" : "From $7.90";
   return (
-    <Tap>
+    <Tap className="h-full">
       <Link
         href={themePath(locale, theme)}
-        className="group block overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-sky-100 transition hover:ring-ocean/30"
+        className="group flex h-full flex-col overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-sky-100 transition hover:ring-ocean/30"
       >
         <div className={`relative h-52 bg-gradient-to-br ${theme.accent}`}>
           <Image src={theme.image} alt={copy.name} fill className="object-cover transition duration-500 group-hover:scale-105" />
@@ -49,10 +52,10 @@ export function ThemeCard({
             {available ? "PDF" : locale === "pt" ? "Em breve" : "Coming soon"}
           </div>
         </div>
-        <div className="p-5">
+        <div className="flex flex-1 flex-col p-5">
           {showStartingPrice && available ? (
             <span className="mb-3 inline-flex rounded-full bg-sunny px-3 py-1 text-xs font-black text-ink">
-              {locale === "pt" ? "A partir de R$7,90" : "From $7.90"}
+              {startingPrice}
             </span>
           ) : !available ? (
             <span className="mb-3 inline-flex rounded-full bg-sunny px-3 py-1 text-xs font-black text-ink">
@@ -60,7 +63,7 @@ export function ThemeCard({
             </span>
           ) : null}
           <h3 className="text-xl font-black text-ink">{copy.name}</h3>
-          <p className="mt-2 min-h-12 text-sm leading-6 text-ink/65">{copy.short}</p>
+          <p className="mt-2 flex-1 text-sm leading-6 text-ink/65">{copy.short}</p>
           <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-skywash px-4 py-2 text-sm font-black text-ocean">
             {available ? (locale === "pt" ? "Ver coleção" : "View collection") : (locale === "pt" ? "Ver prévia" : "Preview")}
             <Star size={16} fill="currentColor" aria-hidden />
