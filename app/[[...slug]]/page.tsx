@@ -651,7 +651,7 @@ function FathersDayPageContent({
                   <span className="absolute bottom-4 left-4 rounded-full bg-candy px-4 py-2 text-xs font-black text-white shadow-soft">
                     {product.badge}
                   </span>
-                  <span className="absolute right-4 top-4 rounded-full bg-white/92 px-4 py-2 text-xs font-black text-ink shadow-soft">
+                  <span className="absolute right-4 top-4 rounded-full bg-sunny px-4 py-2 text-xs font-black text-ink shadow-soft">
                     PDF digital
                   </span>
                 </div>
