@@ -579,9 +579,9 @@ function FathersDayPageContent({
               <Image
                 src="/images/dia-dos-pais-logo-crop.png"
                 alt="Logo Dia dos Pais"
-                width={940}
-                height={480}
-                className="absolute left-0 top-0 z-10 w-[19rem] rotate-[-4deg] drop-shadow-2xl sm:w-[24rem] lg:w-[26rem]"
+                width={1536}
+                height={1024}
+                className="absolute left-0 top-0 z-10 w-[16rem] rotate-[-4deg] drop-shadow-2xl sm:w-[20rem] lg:w-[22rem]"
                 priority
               />
               <Image
