@@ -583,7 +583,7 @@ function FathersDayPageContent({
                 className="aspect-[1122/1402] w-full object-cover"
                 priority
               />
-              <div className="floating absolute left-4 top-[56%] z-20 rotate-[-3deg] rounded-2xl bg-white px-3 py-2.5 shadow-soft sm:left-8 sm:p-4">
+              <div className="floating absolute bottom-8 left-4 z-20 rotate-[-3deg] rounded-2xl bg-white px-3 py-2.5 shadow-soft sm:bottom-10 sm:left-8 sm:p-4">
                 <p className="text-xs font-black text-ink sm:text-sm">R$10,00</p>
                 <p className="text-[0.65rem] font-bold text-ink/60 sm:text-xs">livro individual</p>
               </div>
