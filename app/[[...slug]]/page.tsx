@@ -457,9 +457,9 @@ function SeasonalPage({ locale }: { locale: Locale }) {
 }
 
 const fathersDayCheckoutLinks = {
-  son: "#LINK_CHECKOUT_DIA_DOS_PAIS_FILHO",
-  daughter: "#LINK_CHECKOUT_DIA_DOS_PAIS_FILHA",
-  pack: "#LINK_CHECKOUT_DIA_DOS_PAIS_PACK"
+  son: "https://pay.kiwify.com.br/11Xingi",
+  daughter: "https://pay.kiwify.com.br/BaZfvpu",
+  pack: "https://pay.kiwify.com.br/323ZlRZ"
 };
 
 const fathersDayProducts = [
