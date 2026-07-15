@@ -583,7 +583,7 @@ function FathersDayPageContent({
                 alt="Logo Dia dos Pais"
                 width={1536}
                 height={1024}
-                className="absolute left-1/2 top-24 z-10 w-[14rem] -translate-x-1/2 rotate-[-4deg] drop-shadow-2xl sm:left-0 sm:top-0 sm:w-[20rem] sm:translate-x-0 lg:w-[22rem]"
+                className="absolute left-1/2 top-24 z-10 w-[15.5rem] max-w-[72vw] -translate-x-1/2 rotate-[-4deg] drop-shadow-2xl sm:left-0 sm:top-0 sm:w-[20rem] sm:max-w-none sm:translate-x-0 lg:w-[22rem]"
                 priority
               />
               <Image
