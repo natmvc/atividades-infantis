@@ -545,8 +545,7 @@ function FathersDayPageContent({
 }) {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-[#f8fbff] px-4 py-12 sm:px-6 lg:py-16">
-        <div className="absolute inset-x-0 top-0 -z-10 h-80 bg-gradient-to-br from-[#9bd8ff] via-[#eaf5ff] to-[#ffe6ef]" />
+      <section className="relative isolate overflow-hidden bg-[#f8fbff] px-4 py-8 sm:px-6 lg:py-16">
         <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-10">
           <Reveal className="order-2 lg:order-1">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-ocean shadow-soft ring-1 ring-sky-100">
@@ -575,30 +574,32 @@ function FathersDayPageContent({
             </div>
           </Reveal>
           <Reveal delay={0.1} className="relative order-1 mx-auto w-[92vw] max-w-[42rem] min-w-0 sm:w-full lg:order-2 lg:max-w-none">
-            <div className="relative -mt-10 min-h-[29rem] sm:min-h-[34rem] lg:min-h-[36rem]">
-              <div className="floating absolute left-1 top-[7.75rem] z-30 rotate-[-3deg] rounded-2xl bg-white px-3 py-2.5 shadow-soft sm:left-8 sm:top-12 sm:p-4 lg:left-2 lg:top-16 lg:rotate-[3deg]">
-                <p className="text-xs font-black text-ink sm:text-sm">R$10,00</p>
-                <p className="text-[0.65rem] font-bold text-ink/60 sm:text-xs">livro individual</p>
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#9bd8ff] via-[#eaf5ff] to-[#ffe6ef] shadow-soft ring-1 ring-sky-100 sm:rounded-[2.5rem]">
+              <div className="relative min-h-[29rem] sm:min-h-[34rem] lg:min-h-[36rem]">
+                <div className="floating absolute left-10 top-[10.5rem] z-30 rotate-[-3deg] rounded-2xl bg-white px-3 py-2.5 shadow-soft sm:left-16 sm:top-[7.25rem] sm:p-4 lg:left-10 lg:top-[8.5rem] lg:rotate-[3deg]">
+                  <p className="text-xs font-black text-ink sm:text-sm">R$10,00</p>
+                  <p className="text-[0.65rem] font-bold text-ink/60 sm:text-xs">livro individual</p>
+                </div>
+                <div className="floating-delay absolute bottom-[6.6rem] right-5 z-30 w-32 rotate-[3deg] rounded-2xl bg-sunny px-3 py-2.5 text-center text-ink shadow-soft sm:bottom-24 sm:right-8 sm:w-36 sm:p-4 lg:bottom-12 lg:right-5 lg:rotate-[4deg]">
+                  <p className="text-xs font-black sm:text-sm">Pack R$14,90</p>
+                </div>
+                <Image
+                  src="/images/dia-dos-pais-pack-livros.png"
+                  alt="Dois livros digitais de Dia dos Pais"
+                  width={1300}
+                  height={900}
+                  className="absolute bottom-10 left-1/2 z-10 w-[108%] max-w-[38rem] -translate-x-1/2 drop-shadow-2xl sm:bottom-12 sm:w-[112%] sm:max-w-[42rem] lg:bottom-0 lg:left-auto lg:right-0 lg:w-full lg:max-w-[46rem] lg:translate-x-0"
+                  priority
+                />
+                <Image
+                  src="/images/dia-dos-pais-logo-crop.png"
+                  alt="Logo Dia dos Pais"
+                  width={1536}
+                  height={1024}
+                  className="absolute bottom-0 left-1/2 z-20 w-[10.5rem] -translate-x-1/2 rotate-[-4deg] drop-shadow-2xl sm:w-[13rem] lg:bottom-2 lg:left-14 lg:w-[14rem] lg:translate-x-0"
+                  priority
+                />
               </div>
-              <div className="floating-delay absolute bottom-[6.75rem] right-0 z-30 w-32 rotate-[3deg] rounded-2xl bg-sunny px-3 py-2.5 text-center text-ink shadow-soft sm:bottom-24 sm:right-5 sm:w-36 sm:p-4 lg:bottom-12 lg:right-0 lg:rotate-[4deg]">
-                <p className="text-xs font-black sm:text-sm">Pack R$14,90</p>
-              </div>
-              <Image
-                src="/images/dia-dos-pais-pack-livros.png"
-                alt="Dois livros digitais de Dia dos Pais"
-                width={1300}
-                height={900}
-                className="absolute bottom-10 left-1/2 z-10 w-[108%] max-w-[38rem] -translate-x-1/2 drop-shadow-2xl sm:bottom-12 sm:w-[112%] sm:max-w-[42rem] lg:bottom-0 lg:left-auto lg:right-0 lg:w-full lg:max-w-[46rem] lg:translate-x-0"
-                priority
-              />
-              <Image
-                src="/images/dia-dos-pais-logo-crop.png"
-                alt="Logo Dia dos Pais"
-                width={1536}
-                height={1024}
-                className="absolute bottom-0 left-1/2 z-20 w-[10.5rem] -translate-x-1/2 rotate-[-4deg] drop-shadow-2xl sm:w-[13rem] lg:bottom-2 lg:left-14 lg:w-[14rem] lg:translate-x-0"
-                priority
-              />
             </div>
           </Reveal>
         </div>
