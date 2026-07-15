@@ -574,13 +574,30 @@ function FathersDayPageContent({
             </div>
           </Reveal>
           <Reveal delay={0.1} className="relative order-1 mx-auto w-[92vw] max-w-[42rem] min-w-0 sm:w-full lg:order-2 lg:max-w-none">
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#9bd8ff] via-[#eaf5ff] to-[#ffe6ef] shadow-soft ring-1 ring-sky-100 sm:rounded-[2.5rem] lg:overflow-visible lg:rounded-none lg:bg-none lg:shadow-none lg:ring-0">
-              <div className="relative min-h-[29rem] sm:min-h-[34rem] lg:min-h-[34rem]">
-                <div className="floating absolute left-[17%] top-[10.8rem] z-30 rotate-[-3deg] rounded-2xl bg-white px-3 py-2.5 shadow-soft sm:left-[18%] sm:top-[9rem] sm:p-4 lg:left-auto lg:right-24 lg:top-4 lg:rotate-[3deg] lg:rounded-3xl">
+            <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-sky-100 sm:rounded-[2.5rem] lg:hidden">
+              <Image
+                src="/images/dia-dos-pais-mobile-hero.png"
+                alt="Dia dos Pais com livros digitais do filho e da filha"
+                width={1122}
+                height={1402}
+                className="aspect-[1122/1402] w-full object-cover"
+                priority
+              />
+              <div className="floating absolute left-4 top-[56%] z-20 rotate-[-3deg] rounded-2xl bg-white px-3 py-2.5 shadow-soft sm:left-8 sm:p-4">
+                <p className="text-xs font-black text-ink sm:text-sm">R$10,00</p>
+                <p className="text-[0.65rem] font-bold text-ink/60 sm:text-xs">livro individual</p>
+              </div>
+              <div className="floating-delay absolute bottom-8 right-4 z-20 w-32 rotate-[3deg] rounded-2xl bg-sunny px-3 py-2.5 text-center text-ink shadow-soft sm:bottom-10 sm:right-8 sm:w-36 sm:p-4">
+                <p className="text-xs font-black sm:text-sm">Pack R$14,90</p>
+              </div>
+            </div>
+            <div className="relative hidden lg:block">
+              <div className="relative min-h-[34rem]">
+                <div className="floating absolute right-24 top-4 z-30 rotate-[3deg] rounded-3xl bg-white p-4 shadow-soft">
                   <p className="text-xs font-black text-ink sm:text-sm">R$10,00</p>
                   <p className="text-[0.65rem] font-bold text-ink/60 sm:text-xs">livro individual</p>
                 </div>
-                <div className="floating-delay absolute bottom-[6.75rem] right-[9%] z-30 w-32 rotate-[3deg] rounded-2xl bg-sunny px-3 py-2.5 text-center text-ink shadow-soft sm:bottom-24 sm:right-[12%] sm:w-36 sm:p-4 lg:-right-2 lg:bottom-10 lg:w-auto lg:rotate-[4deg] lg:rounded-3xl">
+                <div className="floating-delay absolute -right-2 bottom-10 z-30 rotate-[4deg] rounded-3xl bg-sunny p-4 text-ink shadow-soft">
                   <p className="text-xs font-black sm:text-sm">Pack R$14,90</p>
                 </div>
                 <Image
@@ -588,7 +605,7 @@ function FathersDayPageContent({
                   alt="Dois livros digitais de Dia dos Pais"
                   width={1300}
                   height={900}
-                  className="absolute bottom-10 left-1/2 z-10 w-full max-w-[34rem] -translate-x-1/2 drop-shadow-2xl sm:bottom-12 sm:w-[104%] sm:max-w-[42rem] lg:bottom-0 lg:left-auto lg:right-0 lg:w-full lg:max-w-[45rem] lg:translate-x-0"
+                  className="absolute bottom-0 right-0 z-10 w-full max-w-[45rem] drop-shadow-2xl"
                   priority
                 />
                 <Image
@@ -596,7 +613,7 @@ function FathersDayPageContent({
                   alt="Logo Dia dos Pais"
                   width={1536}
                   height={1024}
-                  className="absolute bottom-0 left-1/2 z-20 w-[10.5rem] -translate-x-1/2 rotate-[-4deg] drop-shadow-2xl sm:w-[13rem] lg:bottom-auto lg:left-0 lg:top-0 lg:w-[22rem] lg:translate-x-0"
+                  className="absolute left-0 top-0 z-20 w-[22rem] rotate-[-4deg] drop-shadow-2xl"
                   priority
                 />
               </div>
